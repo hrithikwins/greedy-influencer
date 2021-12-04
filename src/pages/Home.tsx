@@ -35,7 +35,7 @@ function Home() {
                             color="primary"
                             onClick={() =>
                                 navigate(
-                                    "/4f38ef83-99cd-4aca-a341-8f1e1c674043"
+                                    "transaction/4f38ef83-99cd-4aca-a341-8f1e1c674043"
                                 )
                             }
                         >
