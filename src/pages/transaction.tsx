@@ -178,60 +178,81 @@ function Transaction() {
                                 type="text"
                                 name="merchantID"
                                 value="T_99922"
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="merchantTxnNo"
-                                value="923892aa"
+                                value={data[0].transactionId}
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="amount"
                                 value={data[0].billAmount}
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="currencyCode"
                                 value="356"
+                                className="invisible"
                             />
-                            <input type="text" name="payType" value="" />
-                            <input type="text" name="paymentMode" value="" />
+                            <input
+                                type="text"
+                                name="payType"
+                                value=""
+                                className="invisible"
+                            />
+                            <input
+                                type="text"
+                                name="paymentMode"
+                                value=""
+                                className="invisible"
+                            />
                             <input
                                 type="text"
                                 name="customerEmailID"
                                 value=""
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="transactionType"
                                 value=""
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="txnDate"
                                 value="20211201175959"
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="aggregatorID"
                                 value="J_99923"
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="returnURL"
                                 value="https://qa.phicommerce.com/pg/api/merchant"
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="secureHash" //alphanumeric
                                 value={result}
                                 onChange={(e) => setResult(e.target.value)}
+                                className="invisible"
                             />
                             <input
                                 type="text"
                                 name="hashText"
                                 value={secureHash}
                                 onChange={(e) => setSecureHash(e.target.value)}
+                                className="invisible"
                             />
 
                             {/* done */}
@@ -258,14 +279,18 @@ function Transaction() {
                                     >
                                         Pay &#8377;{item.linkAmount} Now
                                     </Button>
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="secondary"
-                                        // onClick={() => postPayment()}
-                                    >
-                                        Confirm
-                                    </Button>
+                                    {secureHash != null && secureHash !== "" ? (
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="secondary"
+                                            // onClick={() => postPayment()}
+                                        >
+                                            Confirm
+                                        </Button>
+                                    ) : (
+                                        <></>
+                                    )}
                                     {/* )} */}
                                 </h4>
                             ) : (
