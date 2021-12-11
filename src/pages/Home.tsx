@@ -6,7 +6,8 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-    const { router } = useParams();
+    let { transactionId } = useParams();
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -24,8 +25,6 @@ function Home() {
                     <img src="./logo512.png" alt="" />
                     <br />
                     <h3> Priority Pay Payment Settlement Platform</h3>
-                    <br />
-                    <br />
                     <br />
                     <br />
                     <br />

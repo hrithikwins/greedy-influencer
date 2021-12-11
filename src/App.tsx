@@ -10,6 +10,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
+                    <Route path="/:transactionId" element={<Payphi />}></Route>
                     <Route path="/payphi" element={<Payphi />}></Route>
                     <Route
                         path="/transaction/:transactionId"
