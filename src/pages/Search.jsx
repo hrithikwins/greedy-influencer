@@ -572,11 +572,11 @@ function Search() {
                                                 <div className="col-md-3 p-1">
                                                     <div className="card">
                                                         <img
-                                                            className="img-fluid"
+                                                            className="img-fluid actress-image"
                                                             src={
                                                                 imageList[index]
                                                             }
-                                                            // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mrdustbin.com%2Fwp-content%2Fuploads%2F2020%2F06%2FNora-Fatehi-4-819x1024.jpg&f=1&nofb=1"
+                                                            // src="https://i.pravatar.cc/1000*1200"
                                                             alt=""
                                                         />
                                                         <div className="d-flex">

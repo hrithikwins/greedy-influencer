@@ -82,3 +82,8 @@
 .bordered-search {
     width: 15%;
 }
+
+.actress-image {
+    height: 450px !important;
+    width: auto;
+}
