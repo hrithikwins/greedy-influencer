@@ -139,8 +139,18 @@ function Search() {
     //     );
     // }, []);
     const handleCategoryChange = (event) => {
-        setCategory(event.target.value);
+        setCategory(() => event.target.value);
         filterCategory(event.target.value);
+    };
+
+    const filterCategory = (category) => {
+        let results = instaData.filter((item) => {
+            return item.Category.toLowerCase().startsWith(
+                category.toLowerCase()
+            );
+            // Use the toLowerCase() method to make it case-insensitive
+        });
+        setData(results);
     };
 
     return (
@@ -218,7 +228,7 @@ function Search() {
                                             <MenuItem value={"Actor"}>
                                                 Actor
                                             </MenuItem>
-                                            <MenuItem value={"Model"}>
+                                            <MenuItem value={"Designer"}>
                                                 Designer
                                             </MenuItem>
                                         </Select>
@@ -457,7 +467,7 @@ function Search() {
                                                     <div className="card">
                                                         <img
                                                             className="img-fluid"
-                                                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.eventworld.co%2Fblob%2Fimages%2Fpg%2Fnorah-jones_1ec80_1000.jpg&f=1&nofb=1"
+                                                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mrdustbin.com%2Fwp-content%2Fuploads%2F2020%2F06%2FNora-Fatehi-4-819x1024.jpg&f=1&nofb=1"
                                                             alt=""
                                                         />
                                                         <div className="d-flex">
