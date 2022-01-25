@@ -459,7 +459,7 @@ function Search() {
                                                     <div className="card">
                                                         <img
                                                             className="img-fluid"
-                                                            src="https://phlanx.com/phx-image?url=https%3A%2F%2Fphlanx-images.s3.amazonaws.com%2Fhandle%2Finstagram%2F1405619074.jpg"
+                                                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.eventworld.co%2Fblob%2Fimages%2Fpg%2Fnorah-jones_1ec80_1000.jpg&f=1&nofb=1"
                                                             alt=""
                                                         />
                                                         <div className="d-flex">
