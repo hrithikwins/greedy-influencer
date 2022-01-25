@@ -1,13 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Roboto", sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+.header-background {
+    background-size: cover;
+    width: 100vw;
+    background-image: url(https://www.upfluence.com/wp-content/uploads/2019/04/Background-header@2x.png);
+}
+
+.login-container {
+    font-size: 106%;
+    color: rgb(104, 104, 104);
+}
+.extra-padding-right {
+    padding-right: 60px;
+}
+
+.logo-image {
+    width: 180px;
+}
+
+.get-started-button {
+    background-color: #ff0022;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* email section */
+
+.email-box {
+    border-radius: 5px;
+}
+
+.email-input {
+    width: 60%;
+    height: 48px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ff0022;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+.email-button {
+    background-color: #ff0022;
+    border-radius: 0 5px 5px 0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.bold-super {
+    font-weight: 900;
 }

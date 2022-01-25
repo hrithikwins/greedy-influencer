@@ -1,0 +1,23 @@
+.main-container-padding {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background: rgb(216, 175, 175);
+}
+
+.dashboard-container {
+    width: 450px !important;
+}
+
+.content-container {
+    width: 100%;
+}
+
+.clear-all {
+    color: rgb(123, 126, 129);
+    font-size: 12px;
+}
+
+.font-small-120 {
+    font-size: 120%;
+}
