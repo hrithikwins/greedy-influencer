@@ -140,6 +140,7 @@ function Search() {
     // }, []);
     const handleCategoryChange = (event) => {
         setCategory(event.target.value);
+        filterCategory(event.target.value);
     };
 
     return (
@@ -164,9 +165,9 @@ function Search() {
                                     <div className="clear-all">Clear All</div>
                                 </div>
                                 <div className="d-flex flex-column justify-content-between px-4">
-                                    <div className="d-flex px-2 justify-content-around">
+                                    <div className="d-flex px-2 justify-content-around custom-search">
                                         <input
-                                            className="px-1"
+                                            className="px-1 search-input"
                                             placeholder="Search Influencer"
                                             variant="standard"
                                             value={searchTerm}
@@ -218,10 +219,7 @@ function Search() {
                                                 Actor
                                             </MenuItem>
                                             <MenuItem value={"Model"}>
-                                                Model
-                                            </MenuItem>
-                                            <MenuItem value={"Fitness"}>
-                                                Fitness
+                                                Designer
                                             </MenuItem>
                                         </Select>
                                     </FormControl>

@@ -72,3 +72,13 @@
     border-radius: 0 5px 5px 0;
     padding: 10px;
 }
+
+.custom-search {
+    width: 100%;
+}
+.search-input {
+    width: 85%;
+}
+.bordered-search {
+    width: 15%;
+}
