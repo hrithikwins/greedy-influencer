@@ -183,14 +183,16 @@ function Search() {
                                         </div>
                                         {/*  */}
                                     </div>
-                                    {/* search influencer */}
-                                    <FormGroup>
-                                        <FormControlLabel
-                                            control={<Checkbox />}
-                                            label="Only influencers with email"
-                                            // className="font-small-120"
-                                        />
-                                    </FormGroup>
+                                    <div className="px-2">
+                                        {/* search influencer */}
+                                        <FormGroup>
+                                            <FormControlLabel
+                                                control={<Checkbox />}
+                                                label="Only influencers with email"
+                                                // className="font-small-120"
+                                            />
+                                        </FormGroup>
+                                    </div>
 
                                     <div className="p-2"></div>
 
@@ -432,7 +434,7 @@ function Search() {
                                                 id="demo-simple-select-standard"
                                                 // value={category}
                                                 // onChange={handleCategoryChange}
-                                                value={10}
+                                                // value={10}
                                                 label="Sort"
                                             >
                                                 <MenuItem value="">
