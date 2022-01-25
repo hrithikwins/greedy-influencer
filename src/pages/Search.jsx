@@ -24,28 +24,110 @@ import "../home.css";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-function Home() {
+import instaData from "./../data.json";
+
+function Search() {
     let { transactionId } = useParams();
 
     let navigate = useNavigate();
-    const [category, setCategory] = useState<String>("");
-    const [sliderValue, setSliderValue] = useState<[number, number]>([2, 4]);
-    const [sliderViewsValue, setSliderViewsValue] = useState<[number, number]>([
-        2, 4,
-    ]);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [category, setCategory] = useState("");
+    const [sliderValue, setSliderValue] = useState([2, 4]);
+    const [sliderViewsValue, setSliderViewsValue] = useState([2, 4]);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [data, setData] = useState(instaData);
+
+    const marks = [
+        {
+            value: 10,
+            label: "100K",
+        },
+        {
+            value: 100000,
+            label: "10M",
+        },
+    ];
     const open = Boolean(anchorEl);
-    const handleThreeDotClick = (event: React.MouseEvent<HTMLElement>) => {
+
+    const handleThreeDotClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleProfileClose = () => {
         setAnchorEl(null);
     };
-    const handleSliderChange = (event: any, newValue: any) => {
+    const handleSliderChange = (event, newValue) => {
+        let firstValue, secondValue;
         setSliderValue(newValue);
+        // firstValue = newValue[0]; //this is 1 to 50 and convert to 10 to 100
+        // //first value here 1 to 50 and convert to 10 to 100
+        // if (newValue[0] < 50) {
+        //     firstValue = newValue[0] * 10;
+        //     //if first value is greater than 50  then 1 to 100
+        // } else if (newValue[0] > 50) firstValue = newValue[0] * 100;
+
+        // // ---second value
+        // if (newValue[1] < 50) {
+        //     secondValue = newValue[1];
+        //     //if first value is greater than 50  then 1 to 100
+        // } else if (newValue[1] > 50) secondValue = newValue[1] - 50;
+
+        const kFollowers = instaData.filter((item) => {
+            return item.Followers.toLowerCase().endsWith("k");
+            // Use the toLowerCase() method to make it case-insensitive
+        });
+        const mFollowers = instaData.filter((item) => {
+            return item.Followers.toLowerCase().endsWith("m");
+            // Use the toLowerCase() method to make it case-insensitive
+        });
+        // TODO: fix here
+        // the slider logic
+        // firstValue = newValue[0]; //this goes between 1 t0 100
+        // if (newValue[0] > 100) {
+        // } else if (newValue[0] < 100) {
+        //     firstValue = 1000;
+        // }
+        // if (newValue[1] > 100) {
+        // secondValue = newValue[1] / 1000; // this goes betweeen 1 to 100 again
+        // } else if (newValue[1] < 100) {
+        //     secondValue = 0;
+        // }
+
+        const kResults = kFollowers.filter((item) => {
+            return (
+                item.Followers.slice(0, item.Followers.length - 1) >=
+                newValue[0]
+            );
+        });
+        const mResults = mFollowers.filter((item) => {
+            return (
+                item.Followers.slice(0, item.Followers.length - 1) >=
+                newValue[0]
+            );
+        });
+        Object.assign(kResults, mResults);
+        setData(kResults);
+
+        // setData(results);
     };
-    const handleSliderViewsChange = (event: any, newValue: any) => {
+    const handleSliderViewsChange = (event, newValue) => {
         setSliderViewsValue(newValue);
+    };
+
+    const updateTheGridBySearch = (e) => {
+        const keyword = e.target.value;
+
+        if (searchTerm.length > 0) {
+            const results = instaData.filter((item) => {
+                return item.Name.toLowerCase().startsWith(
+                    keyword.toLowerCase()
+                );
+                // Use the toLowerCase() method to make it case-insensitive
+            });
+            setData(results);
+        } else {
+            setData(instaData);
+            // If the text field is empty, show all users
+        }
     };
     // const [state, setstate] = useState<type>(initialState);
     // useEffect(() => {
@@ -56,9 +138,7 @@ function Home() {
     //         }
     //     );
     // }, []);
-    const handleCategoryChange = (event: {
-        target: { value: SetStateAction<String> };
-    }) => {
+    const handleCategoryChange = (event) => {
         setCategory(event.target.value);
     };
 
@@ -66,7 +146,13 @@ function Home() {
         <>
             <div className="">
                 <div className="main-container-padding w-100">
-                    <div className="container-fluid card py-4"></div>
+                    <div className="container-fluid card">
+                        <img
+                            className="img-fluid logo-image"
+                            src="https://static.wixstatic.com/media/92acf5_c3752edcc580459e8d90e6634997c04a~mv2.png/v1/crop/x_0,y_1182,w_2550,h_1086/fill/w_602,h_256,al_c,q_85,usm_0.66_1.00_0.01/logo.webp"
+                            alt="Opraahfx"
+                        />
+                    </div>
                     <div className="py-1"></div>
                     <div className="main-container-home container-fluid">
                         <div className="d-flex px-4">
@@ -77,20 +163,24 @@ function Home() {
                                     </div>
                                     <div className="clear-all">Clear All</div>
                                 </div>
-                                <div className="d-flex flex-column justify-content-between p-4">
-                                    <div className="d-flex border">
-                                        <TextField
+                                <div className="d-flex flex-column justify-content-between px-4">
+                                    <div className="d-flex px-2 justify-content-around">
+                                        <input
+                                            className="px-1"
                                             placeholder="Search Influencer"
                                             variant="standard"
-                                            className="bordered-search"
+                                            value={searchTerm}
+                                            onChange={(event) => {
+                                                setSearchTerm(
+                                                    event.target.value
+                                                );
+                                                updateTheGridBySearch(event);
+                                            }}
                                         />
-                                        <IconButton
-                                            color="primary"
-                                            aria-label="upload picture"
-                                            component="span"
-                                        >
+                                        <div className="bordered-search">
                                             <SearchIcon />
-                                        </IconButton>
+                                            {/* 100000 to 100000000  */}
+                                        </div>
                                         {/*  */}
                                     </div>
                                     {/* search influencer */}
@@ -103,12 +193,8 @@ function Home() {
                                     </FormGroup>
 
                                     <div className="p-2"></div>
-                                    <div className="p-2">
-                                        <h6>
-                                            <b>Category</b>
-                                        </h6>
-                                    </div>
 
+                                    <b className="px-2">Category</b>
                                     <FormControl
                                         variant="standard"
                                         sx={{ m: 1, minWidth: 120 }}
@@ -121,19 +207,19 @@ function Home() {
                                             id="demo-simple-select-standard"
                                             value={category}
                                             onChange={handleCategoryChange}
-                                            label="Age"
+                                            label="Category"
                                         >
-                                            <MenuItem value="">
+                                            {/* <MenuItem value="">
                                                 <em>None</em>
+                                            </MenuItem> */}
+                                            <MenuItem value={"Actor"}>
+                                                Actor
                                             </MenuItem>
-                                            <MenuItem value={10}>
-                                                Category 1
+                                            <MenuItem value={"Model"}>
+                                                Model
                                             </MenuItem>
-                                            <MenuItem value={20}>
-                                                Category 2
-                                            </MenuItem>
-                                            <MenuItem value={30}>
-                                                Category 3
+                                            <MenuItem value={"Fitness"}>
+                                                Fitness
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
@@ -154,6 +240,9 @@ function Home() {
                                         value={sliderValue}
                                         onChange={handleSliderChange}
                                         valueLabelDisplay="auto"
+                                        marks={marks}
+                                        min={10}
+                                        max={100000}
                                         // getAriaValueText={sliderValueText}
                                     />
                                 </div>
@@ -188,14 +277,14 @@ function Home() {
                                         sx={{ m: 1, minWidth: 120 }}
                                     >
                                         <InputLabel id="demo-simple-select-standard-label">
-                                            Category
+                                            Brand
                                         </InputLabel>
                                         <Select
                                             labelId="demo-simple-select-standard-label"
                                             id="demo-simple-select-standard"
-                                            value={category}
-                                            onChange={handleCategoryChange}
-                                            label="Age"
+                                            // value={category}
+                                            // onChange={handleCategoryChange}
+                                            label="Brand"
                                         >
                                             <MenuItem value="">
                                                 <em>None</em>
@@ -227,14 +316,14 @@ function Home() {
                                         sx={{ m: 1, minWidth: 120 }}
                                     >
                                         <InputLabel id="demo-simple-select-standard-label">
-                                            Category
+                                            Hashtags
                                         </InputLabel>
                                         <Select
                                             labelId="demo-simple-select-standard-label"
                                             id="demo-simple-select-standard"
-                                            value={category}
-                                            onChange={handleCategoryChange}
-                                            label="Age"
+                                            // value={category}
+                                            // onChange={handleCategoryChange}
+                                            label="Hashtags"
                                         >
                                             <MenuItem value="">
                                                 <em>None</em>
@@ -341,18 +430,16 @@ function Home() {
                                             <Select
                                                 labelId="demo-simple-select-standard-label"
                                                 id="demo-simple-select-standard"
-                                                value={category}
-                                                onChange={handleCategoryChange}
+                                                // value={category}
+                                                // onChange={handleCategoryChange}
+                                                value={10}
                                                 label="Sort"
                                             >
                                                 <MenuItem value="">
                                                     <em>None</em>
                                                 </MenuItem>
                                                 <MenuItem value={10}>
-                                                    Price: Low to High
-                                                </MenuItem>
-                                                <MenuItem value={20}>
-                                                    Price: High to Low
+                                                    Name
                                                 </MenuItem>
                                                 <MenuItem value={30}></MenuItem>
                                             </Select>
@@ -364,29 +451,44 @@ function Home() {
                                 {/* the main grid of all influencers */}
                                 <div className="px-3">
                                     <div className="row">
-                                        {[
-                                            "data",
-                                            "bata",
-                                            "atta",
-                                            "cata",
-                                            "mata",
-                                        ].map((item, index) => {
+                                        {data.map((item, index) => {
                                             return (
                                                 <div className="col-md-3 p-1">
                                                     <div className="card">
                                                         <img
                                                             className="img-fluid"
-                                                            src="https://phlanx.com/phx-image?url=https%3A%2F%2Fphlanx-images.s3.amazonaws.com%2Fhandle%2Finstagram%2F872572254.jpg"
+                                                            src="https://phlanx.com/phx-image?url=https%3A%2F%2Fphlanx-images.s3.amazonaws.com%2Fhandle%2Finstagram%2F1405619074.jpg"
                                                             alt=""
                                                         />
                                                         <div className="d-flex">
                                                             <div className="d-flex flex-column w-100">
-                                                                <div className="">
-                                                                    Name
+                                                                <div className="item-name fw-bolder">
+                                                                    <span className="px-1">
+                                                                        {/* Sonakshi Sinha
+                                                                         */}
+                                                                        {
+                                                                            item.Name
+                                                                        }
+                                                                    </span>
+                                                                    <img
+                                                                        className="img-fluid verified-icon"
+                                                                        src="https://emoji.gg/assets/emoji/3460-verified.png"
+                                                                        alt=""
+                                                                    />
                                                                 </div>
-                                                                <div className="">
+                                                                <div className="item-profile-link">
                                                                     {/* @insta */}
-                                                                    @insta
+                                                                    @
+                                                                    {
+                                                                        item[
+                                                                            "Profile Link"
+                                                                        ]
+                                                                    }{" "}
+                                                                    <img
+                                                                        className="img-fluid verified-icon"
+                                                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.usbrandcolors.com%2Fimages%2Flogos%2Finstagram-logo.png&f=1&nofb=1"
+                                                                        alt=""
+                                                                    />
                                                                 </div>
                                                             </div>
                                                             <div>
@@ -460,52 +562,49 @@ function Home() {
                                                         <hr />
                                                         {/* followers and eng rate */}
                                                         <div className="d-flex justify-content-around">
-                                                            <div className="">
-                                                                10m Followers
+                                                            <div className="item-followers">
+                                                                <b>
+                                                                    {
+                                                                        item.Followers
+                                                                    }{" "}
+                                                                </b>
+                                                                Followers
                                                             </div>
-                                                            <div className="">
-                                                                10m Followers
+                                                            <div className="item-engrate">
+                                                                <b>
+                                                                    {Math.round(
+                                                                        Math.random() *
+                                                                            10
+                                                                    ) +
+                                                                        "." +
+                                                                        Math.round(
+                                                                            Math.random() *
+                                                                                30
+                                                                        )}
+                                                                    {"% "}
+                                                                </b>{" "}
+                                                                Eng. Rate
                                                             </div>
                                                         </div>
                                                         {/* address */}
-                                                        <div className="d-flex flex-column">
-                                                            <div className="">
+                                                        <div className="p-1"></div>
+                                                        <div className="d-flex flex-column item-address">
+                                                            <div className="item-address">
                                                                 Mumbai, India
                                                             </div>
-                                                            <div className="">
-                                                                Fitness,
-                                                                Modelling
+                                                            <div className="item-category">
+                                                                Modelling,{" "}
+                                                                {item.Category}
                                                             </div>
                                                         </div>
                                                         <div className="p-2"></div>
-                                                        {/* avatar group */}
-                                                        <div className="d-flex justify-content-between">
-                                                            <div className="">
-                                                                <AvatarGroup
-                                                                    max={4}
-                                                                >
-                                                                    <Avatar
-                                                                        alt="Remy Sharp"
-                                                                        src="/static/images/avatar/1.jpg"
-                                                                    />
-                                                                    <Avatar
-                                                                        alt="Travis Howard"
-                                                                        src="/static/images/avatar/2.jpg"
-                                                                    />
-                                                                    <Avatar
-                                                                        alt="Cindy Baker"
-                                                                        src="/static/images/avatar/3.jpg"
-                                                                    />
-                                                                    <Avatar
-                                                                        alt="Agnes Walker"
-                                                                        src="/static/images/avatar/4.jpg"
-                                                                    />
-                                                                    <Avatar
-                                                                        alt="Trevor Henderson"
-                                                                        src="/static/images/avatar/5.jpg"
-                                                                    />
-                                                                </AvatarGroup>
-                                                            </div>
+
+                                                        <div className="avatar-space d-flex justify-content-between">
+                                                            {/* avatar group */}
+                                                            <img
+                                                                src="avatar-group.png"
+                                                                alt=""
+                                                            />
                                                             <div className="">
                                                                 {/* iconbutton with heart */}
                                                                 <IconButton aria-label="add to favorites">
@@ -529,4 +628,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Search;

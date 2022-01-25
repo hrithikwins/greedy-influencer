@@ -3,17 +3,14 @@ body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: "Roboto", sans-serif;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+    font-family: "Roboto";
 }
 
 .header-background {
     background-size: cover;
+    background-repeat: no-repeat;
     width: 100vw;
+    background-position-y: -420px;
     background-image: url(https://www.upfluence.com/wp-content/uploads/2019/04/Background-header@2x.png);
 }
 
@@ -27,6 +24,9 @@ code {
 
 .logo-image {
     width: 180px;
+}
+.primary-red-text {
+    color: #ff0022;
 }
 
 .get-started-button {
@@ -73,4 +73,13 @@ code {
 
 .bold-super {
     font-weight: 900;
+}
+
+.text-gray {
+    color: #828282;
+}
+.height-holder {
+    height: 100%;
+    background: rgb(139, 139, 139);
+    width: 2px;
 }

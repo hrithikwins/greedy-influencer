@@ -1,8 +1,9 @@
 .main-container-padding {
     width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     background: rgb(216, 175, 175);
+    height: 400%;
 }
 
 .dashboard-container {
@@ -20,4 +21,54 @@
 
 .font-small-120 {
     font-size: 120%;
+}
+
+.item-name {
+    color: rgb(39, 18, 112);
+    padding-top: 12px;
+    padding-left: 12px;
+    font-size: 90%;
+}
+.item-profile-link {
+    padding-left: 12px;
+    font-size: 85%;
+    color: rgb(163, 54, 236);
+}
+.verified-icon {
+    width: 15px;
+}
+
+.item-followers {
+    font-size: 85%;
+}
+.item-engrate {
+    font-size: 85%;
+}
+
+.item-address,
+.item-category {
+    padding-left: 8px;
+    font-size: 85%;
+}
+
+.item-address {
+    color: rgb(78, 78, 80);
+}
+
+.item-category {
+    font-size: 87%;
+
+    color: rgb(47, 47, 151);
+}
+.avatar-space {
+    padding-left: 12px;
+}
+
+.bordered-input {
+    border-radius: 5px 0 0 5px;
+}
+.bordered-search {
+    border: 1px solid rgb(158, 158, 158);
+    border-radius: 0 5px 5px 0;
+    padding: 10px;
 }
