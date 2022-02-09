@@ -8,12 +8,9 @@ import {
     Button,
     Menu,
     Select,
-    TextField,
     FormControl,
     InputLabel,
     Slider,
-    AvatarGroup,
-    Avatar,
 } from "@mui/material";
 import axios from "axios";
 import React, { useState, useEffect, SetStateAction } from "react";
@@ -28,7 +25,6 @@ import instaData from "./../data.json";
 
 function Search() {
     let { transactionId } = useParams();
-
     let navigate = useNavigate();
     const [category, setCategory] = useState("");
     const [sliderValue, setSliderValue] = useState([2, 4]);
@@ -220,7 +216,6 @@ function Search() {
 
     const updateTheGridBySearch = (e) => {
         const keyword = e.target.value;
-
         if (searchTerm.length > 0) {
             const results = instaData.filter((item) => {
                 return item.Name.toLowerCase().startsWith(
@@ -253,7 +248,6 @@ function Search() {
             return item.Category.toLowerCase().startsWith(
                 category.toLowerCase()
             );
-            // Use the toLowerCase() method to make it case-insensitive
         });
         // updateTheGridBySearch(category);
         setData(results);
